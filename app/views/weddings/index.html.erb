@@ -1,0 +1,88 @@
+
+<div class="justify-content-between d-flex my-4">
+  <h2 class="d-flex">Your weddings</h2>
+  <div>
+    <%= link_to 'New Wedding', new_wedding_path, data: { turbolinks: false } %>
+  </div>
+</div>
+
+<% if @weddings.count.positive? %>
+<div class="row justify-content-md-center justify-content-xl-between">
+  <% @weddings.each do |wedding| %>
+    <div class="card m-2" style="max-width: 540px;">
+      <div class="row no-gutters">
+        <div class="col-md-4">
+          <%= image_tag(wedding.avatar, class: 'card-img-top h-100') %>
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title"><%= link_to wedding.name, wedding_url(wedding), data: { turbolinks: false } %></h5>
+            <p class="card-text">
+              <%= fa_icon("user") %>
+              <small class="text-muted">
+                <%= link_to(pluralize(wedding.wedding_guests.count, 'guest'), wedding_wedding_guests_url(wedding)) %>
+              </small>
+            </p>
+              <p class="card-text">
+                <%= fa_icon("map") %>
+                <small class="text-muted">
+                  <%= wedding.restaurant_name.present? ? wedding.restaurant_name : 'Restaurant not chosen yet.' %>
+                </small>
+              </p>
+              <p class="card-text">
+                <%= fa_icon("map-marker") %>
+                <small class="text-muted">
+                  <%= wedding.address.present? ? wedding.address : 'Address not chosen yet.' %>
+                </small>
+              </p>
+              <p class="card-text">
+                <%= fa_icon("calendar") %>
+                <small class="text-muted">
+                  <%= wedding.date.present? ? wedding.date.strftime("%d-%m-%Y, %H:%M") : 'Date not chosen yet.'%>
+                </small>
+              </p>
+              <p class="card-text">
+                <%= fa_icon("money") %>
+                <small class="text-muted">
+                  Budget: 
+                  <% if wedding.total_budget.present? %> 
+                    <% if wedding.currency == "USD" %>
+                      $<%= wedding.total_budget %>
+                    <% elsif  wedding.currency == "EUR" %>
+                      <%= wedding.total_budget %>€
+                    <% else %>
+                      <%= wedding.total_budget %> <%= wedding.currency %>
+                    <% end %>
+                  <% else %>
+                    not set yet
+                  <% end %>
+                </small>
+              </p>
+              <p class="card-text">
+                <%= fa_icon("money") %>
+                <small class="text-muted">
+                  <% if wedding.expenses.present? %>
+                    <% if wedding.currency == "USD" %>
+                      <%= link_to("Total expenses: $#{ wedding.expenses.sum(:price) }", wedding_expenses_url(wedding)) %>
+                    <% elsif wedding.currency == "EUR" %>
+                      <%= link_to("Total expenses: #{ wedding.expenses.sum(:price) }€", wedding_expenses_url(wedding)) %>
+                    <% else %>
+                      <%= link_to("Total expenses: #{ wedding.expenses.sum(:price) }", wedding_expenses_url(wedding)) %> <%= wedding.currency %>
+                    <% end %>
+                  <% else %>
+                     <%= link_to("No expenses added yet", wedding_expenses_url(wedding)) %>
+                  <% end %>
+                </small>
+              </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <% end %>
+</div>
+<% else %>
+  <div class="text-center p-5">
+    You have no weddings. <%= link_to 'Start by creating one.', new_wedding_path, data: { turbolinks: false } %>
+  </div>
+<% end %>

@@ -1,0 +1,36 @@
+<% if @planners.count.positive? %>
+<div class="row justify-content-md-center justify-content-xl-between">
+  <% @planners.each do |planner| %>
+    <div class="card m-2" style="max-width: 540px;">
+      <div class="row no-gutters">
+        <div class="col-md-4">
+          <%= image_tag(planner.avatar.url, class: 'card-img-top h-100') %>
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title"> <%= planner.name %></h5>
+              <p class="card-text">
+                <%= fa_icon("address-card") %>
+                <small class="text-muted">
+                  <%= planner.email.present? ? (mail_to planner.email, planner.email, subject: "Wedding planning") : 'No email.' %>
+                </small>
+              </p>
+              <p class="card-text">
+                <%= fa_icon("phone") %>
+                <small class="text-muted">
+                  <%= planner.phone_number.present? ? (link_to planner.phone_number, "tel:#{planner.phone_number}") : 'No phone number.' %>
+                </small>
+              </p>
+              <p class="card-text">
+                <%= fa_icon("calendar") %>
+                <small class="text-muted">
+                  <%= planner.weddings.count.positive? ? 'Planning ' + pluralize(planner.weddings.count, 'wedding') + '.' : 'No weddings planned.'%>
+                </small>
+              </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+<% end %>

@@ -1,0 +1,30 @@
+<!-- <h2 class="text-center mt-2 mb-5">Add The Date of the wedding </h2>
+
+<div class="row justify-content-center">
+
+  <%= form_for(@wedding, url: wedding_path(@wedding), url: { action: "update" }, html: { class: 'col-6' }) do |f| %>
+    <div class="form-group">
+      <%= f.label "Restaurant's name" %>
+      <%= f.text_field :restaurant_name, class: 'form-control' %>
+    </div>
+    <div class="form-group">
+      <%= f.label "The address of the restaurants" %>
+      <%= f.text_field :address, class: 'form-control' %>
+    </div>
+    <div class="form-group">
+      <%= f.label "The date of the wedding" %>
+      <br>
+      <%= f.datetime_select :wedding_date, :placeholder => 'dd/mm/yyyy', class: 'form-control datepicker' %>
+    </div>
+    <div class="form-group">
+    </div>
+    <div class="form-group">
+      <%= f.label "Wedding Photo" %>
+      <%= f.file_field :avatar, class: 'form-control-file' %>
+    </div>
+    <div class="form-group">
+      <%= f.submit nil, class: 'btn btn-primary mt-4' %>
+    </div>
+  <% end %>
+</div>
+ -->

@@ -1,0 +1,38 @@
+<h2 class="text-center my-5"><%= t 'devise.invitations.edit.header' %></h2>
+
+<div class="row justify-content-center">
+<%= form_for resource, :as => resource_name, :url => invitation_path(resource_name), :html => { :method => :put, class: 'col-6' } do |f| %>
+  <%= bootstrap_devise_error_messages! %>
+  <%= f.hidden_field :invitation_token, readonly: true %>
+
+  <% if f.object.class.require_password_on_accepting %>
+    <div class="form-group">
+      <%= f.label :name %>
+      <%= f.text_field :name, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :phone_number %>
+      <%= f.phone_field :phone_number, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :password %>
+      <%= f.password_field :password, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :password_confirmation %>
+      <%= f.password_field :password_confirmation, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :role, "What is your role?" %><br />
+      <%= f.radio_button :role, 'bride' %> Bride<br />
+      <%= f.radio_button :role, 'groom' %> Groom<br />
+    </div>
+  <% end %>
+
+  <%= f.submit t("devise.invitations.edit.submit_button"), class: 'btn btn-primary' %>
+<% end %>
+</div>

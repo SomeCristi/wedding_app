@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Wedding Application</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body data-controller="<%= controller.controller_path %>" data-action="<%= controller.action_name %>">
+<%= render 'shared/navbar' %>
+
+<div class="container">
+<%= flash_messages %>
+</div>
+
+<%= yield :top_content %>
+
+<div class="container rounded p-3 mt-3 main-application-container">
+
+  <% if content_for?(:header) %>
+    <h1><%= yield :header %></h1>
+  <% end %>
+
+  <%= yield %>
+</div>
+
+<div id="footer">
+<!--   <div class="container">
+    <p class="text-muted">Created by <a href="http://bodrovis.tech" target="_blank">Radiant Wind</a></p>
+  </div> -->
+</div>
+
+</body>
+</html>

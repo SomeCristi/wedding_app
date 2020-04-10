@@ -1,0 +1,23 @@
+// Place all the styles related to the Weddings controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.user-item-wrapper {
+  .user-item {
+    border: 1px solid transparent;
+
+    &.selected {
+      border: 1px solid #28a745;
+    }
+
+    .user-name {
+      margin-top: 5px;
+    }
+  }
+}
+
+.card-img-top {
+  width: 100%;
+  height: 10rem;
+  object-fit: cover;
+}

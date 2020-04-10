@@ -1,0 +1,102 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+@import "bootstrap";
+@import "font-awesome";
+@import "styles/users.scss";
+
+// @import "modules/avatar";
+//TODO
+
+.alert-alert {
+  @extend .alert-warning;
+}
+
+.alert-notice {
+  @extend .alert-info;
+}
+
+
+body {
+  background-color: hsla(0, 50%, 95%, 1);
+  background-image: url(https://images.unsplash.com/photo-1485700281629-290c5a704409?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&w=2400);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.header2 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.header2 h1 {
+  color: #f700be;
+  font-size: 60px;
+  font-weight: 400;
+  margin-bottom: 8px;
+}
+
+.header2 p {
+  color: #ec407a;
+  font-size: 30px;
+  font-weight: lighter;
+}
+
+.custom_link{
+  color: #f700be;
+}
+
+.main-application-container {
+  background-color: rgba(255,255,255,0.5)
+}
+
+body[data-controller="pages"][data-action="index"] {
+  .main-application-container {
+    background-color: transparent;
+  }
+}
+
+#clockdiv{
+    display: inline-block;
+    text-align: center;
+    font-style: italic;
+    font-size: 1.5rem;
+}
+
+// #clockdiv > div{
+//     padding: 10px;
+//     border-radius: 3px;
+//     background: #00BF96;
+//     display: inline-block;
+// }
+
+// #clockdiv div > span{
+//     padding: 15px;
+//     border-radius: 3px;
+//     background: #00816A;
+//     display: inline-block;
+// }
+
+// .smalltext{
+//     padding-top: 5px;
+//     font-size: 16px;
+// }
+
+.text-italic {
+  font-style: italic;
+}

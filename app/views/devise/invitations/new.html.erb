@@ -1,0 +1,19 @@
+<h2 class="text-center my-5"><%= t "devise.invitations.new.header" %></h2>
+
+<div class="row justify-content-center">
+<%= form_for resource, :as => resource_name, :url => invitation_path(resource_name), :html => {:method => :post, class: 'col-6'} do |f| %>
+  
+  <%= bootstrap_devise_error_messages! %>
+
+<% resource.class.invite_key_fields.each do |field| -%>
+  <div class="form-group">
+    <%= f.label field %>
+    <%= f.text_field field, class: 'form-control' %>
+  </div>
+<% end -%>
+
+<div class="form-group">
+  <%= f.submit t("devise.invitations.new.submit_button"), class: 'btn btn-primary' %>
+  </div>
+<% end %>
+</div>

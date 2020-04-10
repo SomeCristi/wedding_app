@@ -1,0 +1,16 @@
+
+<div class="header2">
+  <h1 style="color:#f48fb1; text-align: center;">Weddings <br>Made simple</h1>
+  <%  unless user_signed_in? %>
+    <p>
+      Get in touch with one of our many planners
+    </p>
+    <%= link_to('Get Started', get_all_planners_path, class: 'btn btn-warning btn-lg text-white mt-5', style: 'text-shadow: 1px 1px 0 rgba(0,0,0,0.2)')%>
+  <% end %>
+
+</div>
+
+
+
+
+ <!--  <h1 style="color:#ff99ff; text-align: center;">made simple</h1> -->

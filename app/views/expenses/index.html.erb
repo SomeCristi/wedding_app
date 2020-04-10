@@ -1,0 +1,46 @@
+<%= link_to 'Back to the wedding page', wedding_path(@wedding), data: { turbolinks: false }, class: 'btn btn-link pl-0' %>
+<br>
+<br>
+
+<div class="justify-content-between d-flex">
+  <h2 class="mb-2 d-flex">Expenses</h2>
+  <div>
+    <%= link_to 'New Expense', new_wedding_expense_path  if current_user.planner? %>
+  </div>
+</div>
+
+<table class="table table-striped table-hover">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Price</th>
+      <th colspan="8" scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+     <% @expenses.each.with_index(1) do |expense, index| %>
+      <tr>
+        <th scope="row"><%= index %></th>
+        <td><%= expense.name %></td>
+        <td><%= expense.price %></td>
+        <td><%= link_to 'Edit', edit_wedding_expense_path(@wedding, expense) if current_user.planner?%></td>
+        <td><%= link_to 'Destroy', wedding_expense_path(@wedding, expense), method: :delete, class: 'text-danger', data: { confirm: 'Are you sure?' } if current_user.planner?%></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div class="d-flex flex-row-reverse bd-highlight">
+  <div class="p-2 bd-highlight">    
+    <% unless @expenses.size == 0 %>
+      <% if @wedding.currency == "USD" %>
+        Total cost so far: $<%= @expenses.sum(:price) %>
+      <% elsif @wedding.currency == "EUR" %>
+        Total cost so far: <%= @expenses.sum(:price) %>€
+      <% elsif %>
+        Total cost so far: <%= @expenses.sum(:price) %> <%= @wedding.currency %>
+      <% end %>
+    <% end %>
+  </div>
+</div>

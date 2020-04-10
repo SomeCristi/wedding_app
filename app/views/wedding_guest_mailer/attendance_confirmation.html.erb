@@ -1,0 +1,31 @@
+
+<container class="header">
+  <row>
+    <columns>
+      <h1 class="text-center">                             <%= @wedding.name %></h1>
+    </columns>
+  </row>
+</container>
+
+<container class="body-border">
+  <row>
+    <columns>
+
+      <spacer size="32"></spacer>
+
+      <left>
+        <img src="<%=(url_for(@wedding.avatar))%>" style='width: 500px; height: 400px;'>
+      </left>
+
+      <spacer size="16"></spacer>
+        <br>
+        <% if @wedding.invitation_text.present? %>
+          <p style="text-align: center; white-space: pre-line"> <%= raw(CGI.escapeHTML(@wedding.invitation_text).gsub(" " , '&nbsp;')) %> </p>
+        <% end %>
+        <p align="center"> <%= link_to " Link to our wedding page", wedding_url(@wedding), data: { turbolinks: false } %> </p>
+        <p align="center"> <%=  link_to "RSVP now!", invitation_response_wedding_wedding_guest_url(@wedding,@wedding_guest,token: @wedding_guest.confirm_token) %> </p>
+    </columns>
+  </row>
+
+  <spacer size="16"></spacer>
+</container>

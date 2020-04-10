@@ -1,0 +1,31 @@
+
+
+<div class="justify-content-between d-flex">
+  <h2 class="mb-2 d-flex"><%= @wedding_guest.name %></h2>
+  <div>
+    <%= link_to 'Send invitation', send_one_invite_wedding_wedding_guest_path(@wedding, @wedding_guest), class: 'btn btn-link', class: 'btn btn-link', data: { turbolinks: false } %>
+     <%= link_to 'Edit', edit_wedding_wedding_guest_path(@wedding,@wedding_guest), class: 'btn btn-link', data: { turbolinks: false } %>
+  </div>
+</div>
+
+<p>
+  <strong>Table:</strong>
+  <%= @wedding_guest.table %>
+</p>
+
+<p>
+  <strong>Attending:</strong>
+  <%= @wedding_guest.attending.titlecase %>
+</p>
+
+<p>
+  <strong>Plus one:</strong>
+  <%= @wedding_guest.plus_one.titlecase %>
+</p>
+
+<p>
+  <strong>Menu:</strong>
+  <%= @wedding_guest.menu.titlecase %>
+</p>
+
+<%= link_to 'Back', wedding_wedding_guests_path(@wedding) %>

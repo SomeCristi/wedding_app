@@ -1,0 +1,73 @@
+<%= link_to 'Back to the wedding page', wedding_path(@wedding), class: 'btn btn-link pl-0' %>
+<br>
+<br>
+<h2 class="my-3">Search restaurants</h2>
+
+<div class="field">
+  <%= form_tag(search_restaurants_wedding_path(@wedding), method: :get, class: 'form form-horizontal mt-5') do %>
+  <div class="form-row align-items-center">
+  <div class="col-4">
+    <%= text_field_tag(:query, params[:query], class: 'form-control', placeholder: 'Enter your criterias') %>
+    </div>
+    <div class="col-auto">
+    <%= submit_tag("Search", class: 'btn btn-primary') %>
+    </div>
+    </div>
+  <% end %>
+</div>
+<br>
+<br>
+
+
+<% unless @spots.nil? %>
+<div class="row justify-content-md-center justify-content-xl-between">
+  <% @spots.each do |spot| %>
+    <div class="card m-2" style="max-width: 540px;">
+      <div class="row no-gutters">
+        <div class="col-md-4">
+          <% unless spot.photos[0].nil? %>
+            <img src="<%= spot.photos[0].fetch_url(400) %>" class="card-img-top h-100">
+          <% end %>
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title"> <%= spot.name %> </h5>
+            <p class="card-text">
+              <%= fa_icon("map") %>
+              <small class="text-muted">
+                <%= spot.formatted_address.present? ? spot.formatted_address : "Address not available" %>
+              </small>
+            </p>
+            <p class="card-text">
+              <%= fa_icon("phone") %>
+              <small class="text-muted">
+                <%= spot.formatted_phone_number.present? ? spot.formatted_phone_number : "Phone number not available" %>
+              </small>
+            </p>
+            <p class="card-text">
+              <%= fa_icon("star") %>
+              <small class="text-muted">
+                <%= spot.rating.present? ? spot.rating : "Rating not available" %>
+              </small>
+            </p>
+            <p class="card-text">
+              <%= fa_icon("link") %>
+              <small class="text-muted">
+                <a href="https://www.google.com/maps/search/?api=1&query=Google&query_place_id=<%= spot.place_id %>" cass="btn btn-primary stretched-link">Link to the restaurant's page on Google Maps</a>
+              </small>
+            </p>
+            <% if current_user.planner? %>
+              <p class="card-text">
+                <%= fa_icon("bookmark") %>
+                <small class="text-muted">
+                  <%= link_to "Book the restaurant", book_restaurant_wedding_path(name: spot.name, address: spot.formatted_address, latitude: spot.lat, longitude: spot.lng) %>
+                </small>
+              </p>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+<% end %>

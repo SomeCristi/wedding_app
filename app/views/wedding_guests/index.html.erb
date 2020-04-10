@@ -1,0 +1,68 @@
+<%= link_to 'Back to the wedding page', wedding_path(@wedding), data: { turbolinks: false }, class: 'btn btn-link pl-0' %>
+<br>
+<br>
+<div class="justify-content-between d-flex">
+  <h2 class="mb-2 d-flex">Wedding Guests</h2>
+  <div>
+  <% unless @wedding_guests.size == 0 %>
+    <%= link_to 'Send Invitations', send_invites_wedding_path(@wedding) unless current_user.planner? %>
+    &nbsp;
+    &nbsp;
+  <% end %>
+    <%= link_to 'New Wedding Guest', new_wedding_wedding_guest_path  unless current_user.planner? %>
+  </div>
+</div>
+
+<table class="table table-striped table-hover">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Table</th>
+      <th scope="col">Attendance</th>
+      <th scope="col">Plus One</th>
+      <th scope="col">Menu</th>
+
+      <th colspan="10" scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+     <% @wedding_guests.each.with_index(1) do |wedding_guest, index| %>
+      <tr>
+        <th scope="row"><%= index %></th>
+        <td><%= wedding_guest.name %></td>
+        <td><%= wedding_guest.email %></td>
+        <td><%= wedding_guest.table %></td>
+        <% if wedding_guest.nil? %>
+          <td><%= wedding_guest.attending %></td>
+          <td><%= wedding_guest.plus_one %></td>
+          <td><%= wedding_guest.menu %></td>
+        <% else %>
+          <td><%= wedding_guest.attending.titlecase %></td>
+          <td><%= wedding_guest.plus_one.titlecase %></td>
+          <td><%= wedding_guest.menu.titlecase %></td>
+        <% end %>
+
+        <td><%= link_to 'Show', wedding_wedding_guest_path(@wedding, wedding_guest) unless current_user.planner?%></td>
+        <td><%= link_to 'Edit', edit_wedding_wedding_guest_path(@wedding, wedding_guest) unless current_user.planner?%></td>
+        <td><%= link_to 'Destroy', wedding_wedding_guest_path(@wedding, wedding_guest), method: :delete, class: 'text-danger', data: { confirm: 'Are you sure?' } unless current_user.planner?%></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<% unless current_user.planner? %>
+  <h3 class="mt-5">Import Guest List</h3>
+  <%= form_tag import_wedding_wedding_guests_path, multipart: true do %>
+    <div class="form-group">
+      <%= file_field_tag :file %>
+      <%= submit_tag "Upload guest list", class: 'btn btn-primary' %>
+    </div>
+  <% end %>
+<% end %>
+<!-- <div class="d-flex flex-column bd-highlight mb-3">
+  <div class="p-2 bd-highlight"><%= link_to 'Send Invitations', send_invites_wedding_path(@wedding) %> </div>
+</div> -->
+
+
+

@@ -1,0 +1,38 @@
+<div class="row justify-content-center">
+  <%= form_for @wedding_guest, url: rsvp_wedding_wedding_guest_path(@wedding, @wedding_guest) do |f| %>
+    <%= f.hidden_field :token, value: params["token"] %>
+    <div class="form-group">
+      <%= f.label :attending, "Will you be attending our wedding?" %><br />
+      <%= f.radio_button :attending, 'accepted' %> Yes<br />
+      <%= f.radio_button :attending, 'declined' %> No<br />
+<!--       <%= f.label :attending, "Will you be attending our wedding?" %><br />
+      <%= f.label :attending, "Yes", :value => "attending"  %>
+      <%= f.radio_button :attending, true %>
+      <%= f.label :attending, "No", :value => "declined" %>
+      <%= f.radio_button :attending, false%> -->
+    </div>
+    <div class="form-group">
+      <%= f.label :plus_one, "Will you be accompanied?" %><br />
+      <%= f.radio_button :plus_one, 'yes' %> Yes<br />
+      <%= f.radio_button :plus_one, 'no' %> No<br />
+<!--       <%= f.label :plus_one, "Yes", :value => "yes"  %>
+      <%= f.radio_button :plus_one, true %>
+      <%= f.label :plus_one, "No", :value => "no" %>
+      <%= f.radio_button :plus_one, false, :checked => true %> -->
+    </div>
+    <div class="form-group">
+      <%= f.label :menu, "Do you want a vegetarian menu?" %><br />
+      <%= f.radio_button :menu, 'vegetarian' %> Yes<br />
+      <%= f.radio_button :menu, 'normal' %> No<br />
+<!--       <%= f.label :menu, "Yes", :value => "normal"  %>
+      <%= f.radio_button :menu, true %>
+      <%= f.label :menu, "No", :value => "vegetarian" %>
+      <%= f.radio_button :menu, false, :checked => true %> -->
+    </div>
+    <div class="form-group">
+
+      <%= f.submit "Send response", class: 'btn btn-primary' %>
+    </div>
+
+  <% end %>
+</div>

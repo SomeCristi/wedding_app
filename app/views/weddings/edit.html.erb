@@ -1,0 +1,67 @@
+<h2 class="text-center mt-2 mb-5">Edit wedding</h2>
+
+<div class="row justify-content-center">
+
+  <%= form_for(@wedding, url: wedding_path(@wedding), url: { action: "update" }, html: { class: 'col-6' }) do |f| %>
+    <% if current_user.planner? %>
+      <div class="form-group">
+        <%= f.label "Restaurant's name" %>
+        <%= f.text_field :restaurant_name, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.label "The address of the restaurants" %>
+        <%= f.text_field :address, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.label "The date of the wedding" %>
+        <br>
+        <% if @wedding.date.nil? || @wedding.date.blank? %>
+          <%= f.datetime_select :date, class: 'form-control datepicker', default: Time.now %>
+        <% else %>
+          <%= f.datetime_select :date, class: 'form-control datepicker', default: @wedding.date %>
+        <% end %>
+      </div>
+      <div class="form-group">
+        <%= f.label :total_budget %>
+        <%= f.number_field :total_budget, class: 'form-control' %>
+      </div>
+      <div id="form-group">
+        <%= f.label "Currency" %>
+        <%= f.text_field :currency, class: 'form-control', required: true %>
+      </div>
+    <% end %>
+    <% if current_user.bride? || current_user.groom?%>
+      <div class="form-group">
+        <%= f.label "Wedding Photo" %>
+        <%= f.file_field :avatar, class: 'form-control-file' %>
+      </div>
+      
+    <% end %>
+
+    <% if current_user.bride? %>
+      <div class="form-group">
+        <%= f.label "Your description" %>
+        <%= f.text_area :bride_info, class: 'form-control', rows: 7 %>
+      </div>
+    <% end %>
+
+    <% if current_user.groom? %>
+      <div class="form-group">
+        <%= f.label "Your description" %>
+        <%= f.text_area :groom_info, class: 'form-control', rows: 7 %>
+      </div>
+    <% end %>
+
+
+    <% if current_user.groom? || current_user.bride?%>
+      <div class="form-group">
+        <%= f.label "Your Wedding invitation text" %>
+        <%= f.text_area :invitation_text, class: 'form-control', rows: 10 %>
+      </div>
+    <% end %>
+
+    <div class="form-group">
+      <%= f.submit nil, class: 'btn btn-primary mt-4' %>
+    </div>
+  <% end %>
+</div>
